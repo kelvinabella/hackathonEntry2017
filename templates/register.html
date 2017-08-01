@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="wrapper">
+        <form  class="form-signin" action="{{ url_for('register') }}" method="post">
+            <h2 class="form-signin-heading text-center">Registration</h2>
+            <fieldset>
+                <div class="form-group">
+                    <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" required=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="password" placeholder="Password" type="password" required=""/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="confirm-password" placeholder="Confirm Password" type="password" required=""/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

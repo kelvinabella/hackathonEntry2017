@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
+        <meta charset="utf-8"/>
+        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+
+        <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
+        
+        <title>Inteliqas</title>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+
+    </head>
+
+    <body>
+
+        <div class="container">
+            
+              <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Inteliqas</a>
+                  </div>
+              {% if session.user_id %}
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <form class="navbar-form navbar-right" role="search" action="{{ url_for('logout') }}" method="get">
+                        <button type="submit" class="btn btn-link">Logout</button>
+                      </form>
+                      <form class="navbar-form navbar-right" role="search" action="{{ url_for('settings') }}" method="get">
+                        <button type="submit" class="btn btn-link">Settings</button>
+                      </form>
+                      <form class="navbar-form navbar-right" role="search" action="{{ url_for('buy') }}" method="get">
+                        <button type="submit" class="btn btn-link">Buy</button>
+                      </form>
+                      <form class="navbar-form navbar-right" role="search" action="{{ url_for('monitor') }}" method="get">
+                        <button type="submit" class="btn btn-link">Monitor</button>
+                      </form>
+                  </div>
+                </div>
+                {% endif %}
+              </nav>
+              
+                {% if get_flashed_messages() %}
+                    <div class="alert alert-success alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ get_flashed_messages() | join(" ") }}
+                    </div>
+                {% endif %}
+            <main>
+                {% block main %}{% endblock %}
+            </main>
+            
+        </div>
+      <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      </script>
+      <script type=text/javascript>
+        $(function() {
+          $(".branch").click(function() {
+            var id =$(this).attr('id')
+            var state = $(this).text().search("On") !== -1 ? "Switch Off" : "Switch On"
+            var value = $(this).text().search("On") !== -1 ? 1 : 0
+            console.log(state)
+            $.getJSON($SCRIPT_ROOT + '/branch?', {
+              b: $(this).attr('id'),
+              v: value
+            }, function(data) {
+                
+
+              if (data.res =="ok") {
+                $("#"+id).html(state)
+                }
+            });
+          });
+        });
+      </script>
+
+    </body>
+
+</html>

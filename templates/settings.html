@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block main %}
+    <form class="form-buy" action="{{ url_for('settings') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" class="form-control" name="number" placeholder="Mobile Number" type="text" autofocuss/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default btn-block" type="submit">Submit</button>
+            </div>
+        </fieldset>
+    </form>
+    <div class="text-center">
+        <h4>Register through mobile payment</h4>
+            <p>1. Text INFO to 21585051 (Cross-telco: 29290585051) </p>
+            <p>2. Upon receipt of the ‘welcome message’, you need to reply YES </p>
+    </div>
+{% endblock %}

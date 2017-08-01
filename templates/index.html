@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+  <!--<div class="page-header text-center">-->
+    <h2 class="page-header text-center">Dashboard</h2>
+  <!--</div>-->
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Producer</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead> 
+          <tr>
+            <th>Type</th>
+            <th>Voltge</th>
+            <th>Current</th>
+            <th>Power</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Produced</td>
+            <td>{{voltage_distribution}}</td>
+            <td>{{current_distribution}}</td>
+            <td>{{power_distribution}}</td>
+          </tr>
+          <tr>
+            <td>Distribution</td>
+            <td>{{voltage_consumption}}</td>
+            <td>{{current_consumption}}</td>
+            <td>{{power_consumption}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Consumer</h3>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Voltge</th>
+            <th>Current</th>
+            <th>Power</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Consumption</td>
+            <td>{{voltage_consumption_c}}</td>
+            <td>{{current_consumption_c}}</td>
+            <td>{{power_consumption_c}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}
